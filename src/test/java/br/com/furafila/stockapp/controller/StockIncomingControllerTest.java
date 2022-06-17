@@ -108,7 +108,7 @@ public class StockIncomingControllerTest {
 	@Test
 	public void shouldNotStockInBecauseStockIncomingQuantityIsNotValid() throws Exception {
 
-		newStockIncomingRequest.getNewStockIncomingDTO().setStockIncomingQuantity(0l);
+		newStockIncomingRequest.getNewStockIncomingDTO().setStockIncomingQuantity(-1l);
 
 		mockMvc.perform(post(STOCK_INCOMING_PATH).content(mapper.writeValueAsString(newStockIncomingRequest))
 				.contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isBadRequest()).andDo(print());
@@ -161,6 +161,30 @@ public class StockIncomingControllerTest {
 
 		mockMvc.perform(post(STOCK_INCOMING_PATH).content(incomingJson).contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isBadRequest()).andDo(print());
+
+		verify(stockIncomingService, never()).stockIncoming(any());
+
+	}
+	
+	@Test
+	public void shouldNotStockInBecauseStockIdIsNull() throws Exception {
+
+		newStockIncomingRequest.getNewStockIncomingDTO().setStockId(null);
+
+		mockMvc.perform(post(STOCK_INCOMING_PATH).content(mapper.writeValueAsString(newStockIncomingRequest))
+				.contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isBadRequest()).andDo(print());
+
+		verify(stockIncomingService, never()).stockIncoming(any());
+
+	}
+	
+	@Test
+	public void shouldNotStockInBecauseStockIdIsNotValid() throws Exception {
+
+		newStockIncomingRequest.getNewStockIncomingDTO().setStockId(0l);
+
+		mockMvc.perform(post(STOCK_INCOMING_PATH).content(mapper.writeValueAsString(newStockIncomingRequest))
+				.contentType(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isBadRequest()).andDo(print());
 
 		verify(stockIncomingService, never()).stockIncoming(any());
 

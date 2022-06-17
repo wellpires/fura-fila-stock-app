@@ -15,12 +15,16 @@ import br.com.furafila.stockapp.validator.order.SecondOrder;
 public class NewStockIncomingDTO {
 
 	@NotNull(message = Messages.NEW_STOCK_INCOMING_QUANTITY_IS_REQUIRED)
-	@Min(value = 1, message = Messages.NEW_STOCK_INCOMING_QUANTITY_IS_NOT_VALID)
+	@Min(value = 0, message = Messages.NEW_STOCK_INCOMING_QUANTITY_IS_NOT_VALID)
 	private Long stockIncomingQuantity;
 
-	@NotNull(message = Messages.NEW_STOCK_PRODUCT_ID_IS_REQUIRED)
-	@Min(value = 1, message = Messages.NEW_STOCK_PRODUCT_ID_IS_NOT_VALID)
+	@NotNull(message = Messages.NEW_STOCK_INCOMING_PRODUCT_ID_IS_REQUIRED)
+	@Min(value = 1, message = Messages.NEW_STOCK_INCOMING_PRODUCT_ID_IS_NOT_VALID)
 	private Long productId;
+
+	@NotNull(message = Messages.NEW_STOCK_ID_IS_REQUIRED)
+	@Min(value = 1, message = Messages.NEW_STOCK_ID_IS_NOT_VALID)
+	private Long stockId;
 
 	@NotNull(message = Messages.NEW_STOCK_INCOMING_REASON_IS_REQUIRED, groups = FirstOrder.class)
 	@IncomingReason(message = Messages.NEW_STOCK_INCOMING_REASON_IS_NOT_VALID, groups = SecondOrder.class)
@@ -31,8 +35,8 @@ public class NewStockIncomingDTO {
 		return stockIncomingQuantity;
 	}
 
-	public void setStockIncomingQuantity(Long stockInQuantity) {
-		this.stockIncomingQuantity = stockInQuantity;
+	public void setStockIncomingQuantity(Long stockIncomingQuantity) {
+		this.stockIncomingQuantity = stockIncomingQuantity;
 	}
 
 	public Long getProductId() {
@@ -41,6 +45,14 @@ public class NewStockIncomingDTO {
 
 	public void setProductId(Long productId) {
 		this.productId = productId;
+	}
+
+	public Long getStockId() {
+		return stockId;
+	}
+
+	public void setStockId(Long stockId) {
+		this.stockId = stockId;
 	}
 
 	public String getIncomingReason() {

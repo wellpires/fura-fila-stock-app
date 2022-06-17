@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.com.furafila.stockapp.exception.IncomingReasonNotFoundException;
+import br.com.furafila.stockapp.exception.StockNotFoundException;
 import br.com.furafila.stockapp.response.ErrorResponse;
 
 @RestControllerAdvice
-public class StockIncomingControllerAdvice {
+public class StockControllerAdvice {
 
-	private static final Logger logger = LoggerFactory.getLogger(StockIncomingControllerAdvice.class);
+	private static final Logger logger = LoggerFactory.getLogger(StockControllerAdvice.class);
 
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -42,6 +43,14 @@ public class StockIncomingControllerAdvice {
 	@ExceptionHandler(IncomingReasonNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ResponseEntity<ErrorResponse> handleIncomingReasonNotFoundException(IncomingReasonNotFoundException irnfEx) {
+		logger.error(irnfEx.getMessage(), irnfEx);
+		return ResponseEntity.notFound().build();
+
+	}
+
+	@ExceptionHandler(StockNotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ResponseEntity<ErrorResponse> handleStockNotFoundExceptionNotFoundException(StockNotFoundException irnfEx) {
 		logger.error(irnfEx.getMessage(), irnfEx);
 		return ResponseEntity.notFound().build();
 

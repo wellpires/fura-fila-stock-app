@@ -2,6 +2,7 @@
 	"stockIncoming": {
 		"stockIncomingQuantity": 10,
 		"productId": 1,
-		"incomingReason": "FIRST_ENTRY"
+		"incomingReason": "FIRST_ENTRY",
+        "stockId": 1
 	}
 }
