@@ -17,12 +17,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.com.furafila.stockapp.dto.NewStockIncomingDTO;
+import br.com.furafila.stockapp.dto.NewStockProductDTO;
 import br.com.furafila.stockapp.exception.IncomingReasonNotFoundException;
 import br.com.furafila.stockapp.model.IncomingReason;
 import br.com.furafila.stockapp.model.enums.IncomingReasonEnum;
 import br.com.furafila.stockapp.repository.IncomingReasonRepository;
 import br.com.furafila.stockapp.repository.StockIncomingRepository;
 import br.com.furafila.stockapp.service.StockIncomingService;
+import br.com.furafila.stockapp.service.StockProductService;
 import br.com.furafila.stockapp.util.ReplaceCamelCase;
 
 @DisplayNameGeneration(ReplaceCamelCase.class)
@@ -38,6 +40,9 @@ public class StockIncomingServiceImplTest {
 	@Mock
 	private IncomingReasonRepository incomingReasonRepository;
 
+	@Mock
+	private StockProductService stockProductService;
+
 	@Test
 	public void shouldStockIncoming() {
 
@@ -52,6 +57,25 @@ public class StockIncomingServiceImplTest {
 		stockIncomingService.stockIncoming(stockInDTO);
 
 		verify(stockIncomingRepository, times(1)).save(any());
+		verify(stockProductService, times(1)).createStockProducts(any(NewStockProductDTO.class));
+
+	}
+	
+	@Test
+	public void shouldStockIncomingForSecondTime() {
+
+		IncomingReason incomingReason = new IncomingReason();
+		when(incomingReasonRepository.findByName(any(IncomingReasonEnum.class)))
+				.thenReturn(Optional.ofNullable(incomingReason));
+
+		NewStockIncomingDTO stockInDTO = new NewStockIncomingDTO();
+		stockInDTO.setStockIncomingQuantity(10l);
+		stockInDTO.setProductId(20l);
+		stockInDTO.setIncomingReason("ENTRY");
+		stockIncomingService.stockIncoming(stockInDTO);
+
+		verify(stockIncomingRepository, times(1)).save(any());
+		verify(stockProductService, never()).createStockProducts(any(NewStockProductDTO.class));
 
 	}
 
