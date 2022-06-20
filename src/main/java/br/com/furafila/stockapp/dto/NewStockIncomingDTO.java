@@ -4,8 +4,6 @@ import javax.validation.GroupSequence;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import br.com.furafila.stockapp.annotation.IncomingReason;
 import br.com.furafila.stockapp.util.Messages;
 import br.com.furafila.stockapp.validator.order.FirstOrder;
@@ -28,7 +26,6 @@ public class NewStockIncomingDTO {
 
 	@NotNull(message = Messages.NEW_STOCK_INCOMING_REASON_IS_REQUIRED, groups = FirstOrder.class)
 	@IncomingReason(message = Messages.NEW_STOCK_INCOMING_REASON_IS_NOT_VALID, groups = SecondOrder.class)
-	@JsonProperty("incomingReason")
 	private String incomingReason;
 
 	public Long getStockIncomingQuantity() {

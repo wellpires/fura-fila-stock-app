@@ -1,0 +1,7 @@
+{
+	"stockOutgoing": {
+		"stockOutgoingQuantity": 10,
+		"productId": 12,
+		"outgoingReason": "SALE"
+	}
+}

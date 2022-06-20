@@ -1,5 +1,7 @@
 package br.com.furafila.stockapp.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,7 @@ public class StockOutgoingController implements StockOutgoingResource {
 
 	@Override
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> stockOut(@RequestBody NewStockOutgoingRequest newStockOutgoingRequest) {
+	public ResponseEntity<Void> stockOut(@RequestBody @Valid NewStockOutgoingRequest newStockOutgoingRequest) {
 
 		stockOutgoingService.stockOut(newStockOutgoingRequest.getNewStockOutgoingDTO());
 
