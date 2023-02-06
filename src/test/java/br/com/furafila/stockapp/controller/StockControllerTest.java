@@ -36,7 +36,7 @@ import br.com.furafila.stockapp.util.ReplaceCamelCase;
 @DisplayNameGeneration(ReplaceCamelCase.class)
 public class StockControllerTest {
 
-	private static final String STOCK_PATH = "/{establishmentId}";
+	private static final String STOCK_PATH = "/establishments/{establishmentId}";
 
 	@MockBean
 	private StockService stockService;

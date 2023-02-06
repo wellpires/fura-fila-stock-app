@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import br.com.furafila.stockapp.exception.EstablishmentHasNoStockException;
 import br.com.furafila.stockapp.exception.IncomingReasonNotFoundException;
 import br.com.furafila.stockapp.exception.StockNotFoundException;
 import br.com.furafila.stockapp.response.ErrorResponse;
@@ -52,6 +53,15 @@ public class StockControllerAdvice {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ResponseEntity<ErrorResponse> handleStockNotFoundExceptionNotFoundException(StockNotFoundException irnfEx) {
 		logger.error(irnfEx.getMessage(), irnfEx);
+		return ResponseEntity.notFound().build();
+
+	}
+
+	@ExceptionHandler(EstablishmentHasNoStockException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ResponseEntity<ErrorResponse> handleEstablishmentHasNoStockException(
+			EstablishmentHasNoStockException irnfEx) {
+		logger.warn(irnfEx.getMessage());
 		return ResponseEntity.notFound().build();
 
 	}

@@ -27,4 +27,8 @@ public class Messages {
 	public static final String NEW_STOCK_OUTGOING_REASON_IS_REQUIRED = "{com.stock.new-stock-outgoing.new-stock-outgoing-reason-required}";
 	public static final String NEW_STOCK_OUTGOING_REASON_IS_NOT_VALID = "{com.stock.new-stock-outgoing.new-stock-outgoing-reason-not-valid}";
 
+	public static final String NEW_STOCK_INFO_IS_REQUIRED = "{com.stock.new-stock.stock-info-required}";
+	public static final String NEW_STOCK_ESTABLISHMENT_ID_REQUIRED = "{com.stock.new-stock.establishment-id-required}";
+	public static final String NEW_STOCK_ESTABLISHMENT_ID_NOT_VALID = "{com.stock.new-stock.establishment-id-not-valid}";
+
 }

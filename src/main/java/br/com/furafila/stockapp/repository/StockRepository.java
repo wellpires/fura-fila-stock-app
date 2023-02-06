@@ -9,5 +9,7 @@ import br.com.furafila.stockapp.model.Stock;
 public interface StockRepository extends JpaRepository<Stock, Long> {
 
 	Optional<Stock> findByEstablishmentId(Long establishmentId);
+
+	Boolean existsByEstablishmentId(Long establishmentId);
 	
 }
